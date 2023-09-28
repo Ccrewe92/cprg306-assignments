@@ -11,7 +11,7 @@ export default function Page() {
 
             <h2>
                 <Link href="/week3" className="text-gray-300 hover:text-orange-500 transition-transform duration-300 transform hover:scale-104 hover:translate-x-0.5 inline-block py-1 px-2">
-                    WEEK 3
+                    Week 3
                 </Link>
             </h2>
 

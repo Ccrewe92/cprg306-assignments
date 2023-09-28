@@ -1,5 +1,6 @@
 import React from 'react';
 import Item from './item'; 
+import Link from 'next/link';
 
 const ItemList = () => {
     // Consolidate all individual item constants into one items array
@@ -67,12 +68,22 @@ const ItemList = () => {
     ];
 
     return (
-        <ul className="space-y-4">
-            {items.map((item, index) => (
-                <Item key={index} name={item.name} quantity={item.quantity} category={item.category} />
-            ))}
-        </ul>
+        <div>
+            <ul className="space-y-4">
+                {items.map((item, index) => (
+                    <Item key={index} name={item.name} quantity={item.quantity} category={item.category} />
+                ))}
+            </ul>
+        <Link
+        href="/" className="text-gray-300 hover:text-orange-500 transition-transform duration-300 transform hover:scale-104 hover:translate-x-0.5 inline-block py-1 px-2 mt-2 mb-6"
+        > Back To Home </Link>
+        </div>
     );
 }
 
 export default ItemList;
+
+
+
+
+
