@@ -47,7 +47,17 @@ function NewItem() {
                         onChange={(e) => setCategory(e.target.value)}
                         className="px-3 py-2 border rounded-md text-black"
                     >
-                        {/* ...all the categories as <option> elements here... */}
+                        <option value="produce">Produce</option>
+                        <option value="dairy">Dairy</option>
+                        <option value="bakery">Bakery</option>
+                        <option value="meat">Meat</option>
+                        <option value="frozen foods">Frozen Foods</option>
+                        <option value="canned goods">Canned Goods</option>
+                        <option value="dry goods">Dry Goods</option>
+                        <option value="beverages">Beverages</option>
+                        <option value="snacks">Snacks</option>
+                        <option value="household">Household</option>
+                        <option value="other">Other</option>
                     </select>
                 </div>
                 <button 
