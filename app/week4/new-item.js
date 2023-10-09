@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 
 function NewItem() {
     const [name, setName] = useState("");
@@ -67,11 +68,14 @@ function NewItem() {
                     Submit
                 </button>
             </form>
+            <Link href="/">
+                <a className="text-gray-300 hover:text-orange-500 transition-transform duration-300 transform hover:scale-104 hover:translate-x-0.5 inline-block py-1 px-2 mt-2 mb-6">
+                    Back To Home
+                </a>
+            </Link>
         </div>
     );
-    <Link
-        href="/" className="text-gray-300 hover:text-orange-500 transition-transform duration-300 transform hover:scale-104 hover:translate-x-0.5 inline-block py-1 px-2 mt-2 mb-6"
-        > Back To Home </Link>
+    
 }
 
 export default NewItem;
