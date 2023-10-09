@@ -2,10 +2,13 @@
 
 import NewItem from './new-item';
 
-export default function Page() {
+function Page() {
     return (
-        <div className="min-h-screen bg-gray-100 flex justify-center items-center">
+        <main className="bg-gray-900 text-white p-8 min-h-screen">
+            <h1 className="text-xl font-bold mb-6">NewItem Page</h1>
             <NewItem />
-        </div>
+        </main>
     );
 }
+
+export default Page;
