@@ -1,13 +1,11 @@
-// use client
-import React, { useState } from 'react';
+// use client 
+
 import NewItem from './new-item';
 
-function Page() {
+export default function Page() {
     return (
-        <div className="p-4">
+        <div className="min-h-screen bg-gray-100 flex justify-center items-center">
             <NewItem />
         </div>
     );
 }
-
-export default Page;

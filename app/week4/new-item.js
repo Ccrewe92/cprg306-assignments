@@ -1,4 +1,5 @@
-// use client
+// use client 
+
 import React, { useState } from 'react';
 
 function NewItem() {
@@ -19,51 +20,55 @@ function NewItem() {
     };
 
     return (
-      <div className="p-4 mx-auto max-w-sm w-full">
-          <form onSubmit={handleSubmit} className="p-2 m-4 bg-slate-900 text-black max-w-sm w-full">
-              <div className="mb-2">
-                  <input 
-                      type="text" 
-                      placeholder="Item name" 
-                      value={name} 
-                      onChange={(e) => setName(e.target.value)} 
-                      required 
-                      className="w-full mt-1 border-2 border-gray-300 p-2 rounded-lg font-sans text-white" // Added text-white here
-                  />
-              </div>
-              <div className="flex justify-between">
-                  <input 
-                      type="number" 
-                      min="1" 
-                      max="99" 
-                      value={quantity} 
-                      onChange={(e) => setQuantity(Number(e.target.value))} 
-                      required 
-                      className="w-20 ml-1 border-2 border-gray-300 p-2 rounded-lg font-sans text-white" // Added text-white here
-                  />
-                  <select 
-                      value={category} 
-                      onChange={(e) => setCategory(e.target.value)} 
-                      className="ml-1 border-2 border-gray-300 p-2 rounded-lg font-sans text-white" // Added text-white here
-                  >
-                      <option value="" disabled>Category</option>
-                      <option value="produce">Produce</option>
-                      <option value="dairy">Dairy</option>
-                      <option value="bakery">Bakery</option>
-                      <option value="meat">Meat</option>
-                      <option value="frozen foods">Frozen Foods</option>
-                      <option value="canned goods">Canned Goods</option>
-                      <option value="dry goods">Dry Goods</option>
-                      <option value="beverages">Beverages</option>
-                      <option value="snacks">Snacks</option>
-                      <option value="household">Household</option>
-                      <option value="other">Other</option>
-                  </select>
-              </div>
-              <button type="submit" className="w-full mt-4 py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">+</button>
-          </form>
-      </div>
-  );
+        <div className="bg-white p-6 rounded-lg shadow-lg max-w-md">
+            <form onSubmit={handleSubmit}>
+                <div className="mb-4">
+                    <input 
+                        type="text" 
+                        placeholder="Item name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                        className="w-full px-3 py-2 border rounded-md"
+                    />
+                </div>
+                <div className="mb-4">
+                    <input 
+                        type="number" 
+                        min="1" 
+                        max="99"
+                        value={quantity}
+                        onChange={(e) => setQuantity(Number(e.target.value))}
+                        required
+                        className="w-32 px-3 py-2 border rounded-md mr-4"
+                    />
+                    <select 
+                        value={category} 
+                        onChange={(e) => setCategory(e.target.value)}
+                        className="px-3 py-2 border rounded-md"
+                    >
+                        <option value="produce">Produce</option>
+                        <option value="dairy">Dairy</option>
+                        <option value="bakery">Bakery</option>
+                        <option value="meat">Meat</option>
+                        <option value="frozen foods">Frozen Foods</option>
+                        <option value="canned goods">Canned Goods</option>
+                        <option value="dry goods">Dry Goods</option>
+                        <option value="beverages">Beverages</option>
+                        <option value="snacks">Snacks</option>
+                        <option value="household">Household</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <button 
+                    type="submit" 
+                    className="w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                >
+                    Submit
+                </button>
+            </form>
+        </div>
+    );
 }
 
 export default NewItem;
