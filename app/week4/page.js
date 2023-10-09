@@ -1,11 +1,11 @@
 import NewItem from './new-item';
 
 function Page() {
-  return (
-    <div className="p-4">
-      <NewItem />
-    </div>
-  );
+    return (
+        <div className="p-4">
+            <NewItem />
+        </div>
+    );
 }
 
 export default Page;
