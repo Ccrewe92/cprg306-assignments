@@ -1,17 +1,15 @@
+// use client
 import React, { useState } from 'react';
 
 function NewItem() {
-    
     const [name, setName] = useState("");
     const [quantity, setQuantity] = useState(1);
     const [category, setCategory] = useState("produce");
 
-    
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const item = { name, quantity, category };
-
         console.log(item);
         alert(`Name: ${name}, Quantity: ${quantity}, Category: ${category}`);
 
@@ -30,7 +28,7 @@ function NewItem() {
                       value={name} 
                       onChange={(e) => setName(e.target.value)} 
                       required 
-                      className="w-full mt-1 border-2 border-gray-300 p-2 rounded-lg font-sans" 
+                      className="w-full mt-1 border-2 border-gray-300 p-2 rounded-lg font-sans text-white" // Added text-white here
                   />
               </div>
               <div className="flex justify-between">
@@ -41,12 +39,12 @@ function NewItem() {
                       value={quantity} 
                       onChange={(e) => setQuantity(Number(e.target.value))} 
                       required 
-                      className="w-20 ml-1 border-2 border-gray-300 p-2 rounded-lg font-sans"
+                      className="w-20 ml-1 border-2 border-gray-300 p-2 rounded-lg font-sans text-white" // Added text-white here
                   />
                   <select 
                       value={category} 
                       onChange={(e) => setCategory(e.target.value)} 
-                      className="ml-1 border-2 border-gray-300 p-2 rounded-lg font-sans"
+                      className="ml-1 border-2 border-gray-300 p-2 rounded-lg font-sans text-white" // Added text-white here
                   >
                       <option value="" disabled>Category</option>
                       <option value="produce">Produce</option>
