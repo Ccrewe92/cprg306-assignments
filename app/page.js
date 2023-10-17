@@ -19,6 +19,9 @@ export default function Page() {
             <Link href="/week4" className="text-gray-300 hover:text-orange-500 transition-transform duration-300 transform hover:scale-104 hover:translate-x-0.5 inline-block py-1 px-2">
                 Week 4
             </Link>
+            <Link href="/week5" className="text-gray-300 hover:text-orange-500 transition-transform duration-300 transform hover:scale-104 hover:translate-x-0.5 inline-block py-1 px-2">
+                Week 5
+            </Link>
         </div>
     </main>
   );
