@@ -80,55 +80,68 @@ const ItemList = () => {
         }
     ];
 
-    const [items, setItems] = useState([...itemsData]);
+    const items = [...itemsData];
+
+    if (sortBy === 'name') {
+        items.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortBy === 'category') {
+        items.sort((a, b) => a.category.localeCompare(b.category));
+    }
 
     const handleSortByName = () => {
         setSortBy('name');
-        const sortedItems = [...items];
-        sortedItems.sort((a, b) => a.name.localeCompare(b.name));
-        setItems(sortedItems);
     };
 
     const handleSortByCategory = () => {
         setSortBy('category');
-        const sortedItems = [...items];
-        sortedItems.sort((a, b) => a.category.localeCompare(b.category));
-        setItems(sortedItems);
     };
 
     const handleGroupByCategory = () => {
-        setSortBy('grouped category');
-        const groupedItems = items.reduce((result, item) => {
-            if (!result[item.category]) {
-                result[item.category] = [];
-            }
-            result[item.category].push(item);
-            return result;
-        }, {});
-        const sortedGroupedItems = Object.entries(groupedItems).sort((a, b) =>
-            a[0].localeCompare(b[0])
-        );
-        setItems(sortedGroupedItems.flatMap((entry) => entry[1]));
+        setSortBy('groupedCategory');
     };
+
+    const buttonStyles = `
+        .btn {
+            padding: 8px 16px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            color: #333;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            margin-right: 10px; /* Adds spacing between buttons */
+        }
+
+        .btn:hover {
+            background-color: lightblue;
+            color: #fff;
+        }
+
+        .btn-active {
+            background-color: lightblue;
+            color: #fff;
+        }
+    `;
 
     return (
         <div>
-            <div className="flex space-x-2 mb-4">
+            <style>{buttonStyles}</style>
+            <div>
                 <button
-                    onClick={handleSortByName}
                     className={`btn ${sortBy === 'name' ? 'btn-active' : ''}`}
+                    onClick={handleSortByName}
                 >
                     Sort by Name
                 </button>
                 <button
-                    onClick={handleSortByCategory}
                     className={`btn ${sortBy === 'category' ? 'btn-active' : ''}`}
+                    onClick={handleSortByCategory}
                 >
                     Sort by Category
                 </button>
                 <button
+                    className={`btn ${sortBy === 'groupedCategory' ? 'btn-active' : ''}`}
                     onClick={handleGroupByCategory}
-                    className={`btn ${sortBy === 'grouped category' ? 'btn-active' : ''}`}
                 >
                     Group by Category
                 </button>
@@ -143,14 +156,6 @@ const ItemList = () => {
                     />
                 ))}
             </ul>
-            <div className="mt-6">
-                <Link
-                    href="/"
-                    className="block text-gray-300 hover:text-orange-500 transition-transform duration-300 transform hover:scale-104 hover:translate-x-0.5 py-1 px-2"
-                >
-                    Back To Home
-                </Link>
-            </div>
         </div>
     );
 }
