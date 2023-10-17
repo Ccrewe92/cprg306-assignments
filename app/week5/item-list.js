@@ -80,12 +80,26 @@ const ItemList = () => {
         }
     ];
 
-    const items = [...itemsData];
+    const [items, setItems] = useState([...itemsData]);
 
     if (sortBy === 'name') {
         items.sort((a, b) => a.name.localeCompare(b.name));
     } else if (sortBy === 'category') {
-        items.sort((a, b) => a.category.localeCompare(b.category));
+        // Group and sort by category
+        const groupedItems = items.reduce((result, item) => {
+            if (!result[item.category]) {
+                result[item.category] = [];
+            }
+            result[item.category].push(item);
+            return result;
+        }, {});
+
+        const sortedCategories = Object.keys(groupedItems).sort();
+        const sortedItems = sortedCategories.reduce((result, category) => {
+            return result.concat(groupedItems[category].sort((a, b) => a.name.localeCompare(b.name)));
+        }, []);
+
+        setItems(sortedItems);
     }
 
     const handleSortByName = () => {
@@ -101,23 +115,16 @@ const ItemList = () => {
             <div>
                 <button
                     onClick={handleSortByName}
-                    style={{
-                        backgroundColor: sortBy === 'name' ? 'lightblue' : 'white',
-                    }}
+                    className={`btn ${sortBy === 'name' ? 'btn-active' : ''}`}
                 >
                     Sort by Name
                 </button>
                 <button
                     onClick={handleSortByCategory}
-                    style={{
-                        backgroundColor: sortBy === 'category' ? 'lightblue' : 'white',
-                    }}
+                    className={`btn ${sortBy === 'category' ? 'btn-active' : ''}`}
                 >
                     Sort by Category
                 </button>
-                <Link href="/" className="text-gray-300 hover:text-orange-500 transition-transform duration-300 transform hover:scale-104 hover:translate-x-0.5 inline-block py-1 px-2 mt-2 mb-6">
-                    Back To Home
-                </Link>
             </div>
             <ul className="space-y-4">
                 {items.map((item) => (
@@ -129,8 +136,14 @@ const ItemList = () => {
                     />
                 ))}
             </ul>
+            <div className="mt-6">
+                <Link href="/" className="text-gray-300 hover:text-orange-500 transition-transform duration-300 transform hover:scale-104 hover:translate-x-0.5 inline-block py-1 px-2">
+                    Back To Home
+                </Link>
+            </div>
         </div>
     );
 }
 
 export default ItemList;
+
