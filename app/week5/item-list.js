@@ -82,10 +82,22 @@ const ItemList = () => {
 
     const [items, setItems] = useState([...itemsData]);
 
-    if (sortBy === 'name') {
-        items.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (sortBy === 'category') {
-        // Group and sort by category
+    const handleSortByName = () => {
+        setSortBy('name');
+        const sortedItems = [...items];
+        sortedItems.sort((a, b) => a.name.localeCompare(b.name));
+        setItems(sortedItems);
+    };
+
+    const handleSortByCategory = () => {
+        setSortBy('category');
+        const sortedItems = [...items];
+        sortedItems.sort((a, b) => a.category.localeCompare(b.category));
+        setItems(sortedItems);
+    };
+
+    const handleGroupByCategory = () => {
+        setSortBy('grouped category');
         const groupedItems = items.reduce((result, item) => {
             if (!result[item.category]) {
                 result[item.category] = [];
@@ -93,26 +105,15 @@ const ItemList = () => {
             result[item.category].push(item);
             return result;
         }, {});
-
-        const sortedCategories = Object.keys(groupedItems).sort();
-        const sortedItems = sortedCategories.reduce((result, category) => {
-            return result.concat(groupedItems[category].sort((a, b) => a.name.localeCompare(b.name)));
-        }, []);
-
-        setItems(sortedItems);
-    }
-
-    const handleSortByName = () => {
-        setSortBy('name');
-    };
-
-    const handleSortByCategory = () => {
-        setSortBy('category');
+        const sortedGroupedItems = Object.entries(groupedItems).sort((a, b) =>
+            a[0].localeCompare(b[0])
+        );
+        setItems(sortedGroupedItems.flatMap((entry) => entry[1]));
     };
 
     return (
         <div>
-            <div>
+            <div className="flex space-x-2 mb-4">
                 <button
                     onClick={handleSortByName}
                     className={`btn ${sortBy === 'name' ? 'btn-active' : ''}`}
@@ -124,6 +125,12 @@ const ItemList = () => {
                     className={`btn ${sortBy === 'category' ? 'btn-active' : ''}`}
                 >
                     Sort by Category
+                </button>
+                <button
+                    onClick={handleGroupByCategory}
+                    className={`btn ${sortBy === 'grouped category' ? 'btn-active' : ''}`}
+                >
+                    Group by Category
                 </button>
             </div>
             <ul className="space-y-4">
@@ -137,7 +144,10 @@ const ItemList = () => {
                 ))}
             </ul>
             <div className="mt-6">
-                <Link href="/" className="text-gray-300 hover:text-orange-500 transition-transform duration-300 transform hover:scale-104 hover:translate-x-0.5 inline-block py-1 px-2">
+                <Link
+                    href="/"
+                    className="block text-gray-300 hover:text-orange-500 transition-transform duration-300 transform hover:scale-104 hover:translate-x-0.5 py-1 px-2"
+                >
                     Back To Home
                 </Link>
             </div>
@@ -146,4 +156,3 @@ const ItemList = () => {
 }
 
 export default ItemList;
-
