@@ -1,8 +1,7 @@
 "use client";
 import React, { useState } from 'react';
-import Item from './item'; 
 import Link from 'next/link';
-import items from './items.json';
+import items from './items';
 
 function ItemList() {
   const [sortBy, setSortBy] = useState('name');
