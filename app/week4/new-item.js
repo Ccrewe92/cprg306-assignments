@@ -76,11 +76,6 @@ function NewItem() {
         </div>
         
     );
-     <Link href="/">
-                <a className="text-gray-300 hover:text-orange-500 transition-transform duration-300 transform hover:scale-104 hover:translate-x-0.5 inline-block py-1 px-2 mt-2 mb-6">
-                    Back To Home
-                </a>
-            </Link>
 }
 
 export default NewItem;

@@ -100,6 +100,14 @@ const ItemList = () => {
         setSortBy('groupedCategory');
     };
 
+    const groupedItems = items.reduce((acc, item) => {
+        if (!acc[item.category]) {
+            acc[item.category] = [];
+        }
+        acc[item.category].push(item);
+        return acc;
+    }, {});
+
     const buttonStyles = `
         .btn {
             padding: 8px 16px;
@@ -146,16 +154,36 @@ const ItemList = () => {
                     Group by Category
                 </button>
             </div>
-            <ul className="space-y-4">
-                {items.map((item) => (
-                    <Item
-                        key={item.id}
-                        name={item.name}
-                        quantity={item.quantity}
-                        category={item.category}
-                    />
-                ))}
-            </ul>
+            {sortBy === 'groupedCategory' ? (
+                <div>
+                    {Object.keys(groupedItems).map((category) => (
+                        <div key={category}>
+                            <h2>{category}</h2>
+                            <ul className="space-y-4">
+                                {groupedItems[category].map((item) => (
+                                    <Item
+                                        key={item.id}
+                                        name={item.name}
+                                        quantity={item.quantity}
+                                        category={item.category}
+                                    />
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
+            ) : (
+                <ul className="space-y-4">
+                    {items.map((item) => (
+                        <Item
+                            key={item.id}
+                            name={item.name}
+                            quantity={item.quantity}
+                            category={item.category}
+                        />
+                    ))}
+                </ul>
+            )}
         </div>
     );
 }
