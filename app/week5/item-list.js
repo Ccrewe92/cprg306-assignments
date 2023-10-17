@@ -108,6 +108,8 @@ const ItemList = () => {
         return acc;
     }, {});
 
+    const sortedCategories = Object.keys(groupedItems).sort();
+
     const buttonStyles = `
         .btn {
             padding: 8px 16px;
@@ -156,7 +158,7 @@ const ItemList = () => {
             </div>
             {sortBy === 'groupedCategory' ? (
                 <div>
-                    {Object.keys(groupedItems).map((category) => (
+                    {sortedCategories.map((category) => (
                         <div key={category}>
                             <h2>{category}</h2>
                             <ul className="space-y-4">
