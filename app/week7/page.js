@@ -1,26 +1,49 @@
-"use client";
+import React from 'react';
+import Link from 'next/link';
 
-import React, { useState } from 'react';
-import NewItem from './new-item';
-import ItemList from './item-list';
-import itemsData from './items.json';
-
-const Page = () => {
-
-    const [items, setItems] = useState(itemsData);
-
-
-    const handleAddItem = (newItem) => {
-        setItems(prevItems => [...prevItems, newItem]);
-    }
-
+function BlankPage() {
     return (
-        <main className="min-h-screen bg-gray-900 p-8">
-            <h1 className="text-2xl font-bold text-white mb-6">Shopping List</h1>
-            <NewItem onAddItem={handleAddItem} />
-            <ItemList items={items} />
-        </main>
+        <div className="container">
+            <h1>Blank Page Placeholder</h1>
+            <p>This is a placeholder for the blank page.</p>
+
+            <Link href="/">
+                <a>Go back to Home</a>
+            </Link>
+
+            <style jsx>{`
+                .container {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    height: 100vh;
+                    text-align: center;
+                }
+
+                h1 {
+                    font-size: 24px;
+                    margin-bottom: 16px;
+                }
+
+                p {
+                    font-size: 18px;
+                    margin-bottom: 24px;
+                }
+
+                a {
+                    color: blue;
+                    text-decoration: none;
+                    border-bottom: 1px dashed blue;
+                    padding-bottom: 2px;
+                }
+
+                a:hover {
+                    text-decoration: underline;
+                }
+            `}</style>
+        </div>
     );
 }
 
-export default Page;
+export default BlankPage;
