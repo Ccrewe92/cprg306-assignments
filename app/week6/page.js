@@ -1,8 +1,9 @@
+"use client";
 import React from "react";
 import { useState } from "react";
 import Link from "next/link";
 import ItemList from "./item-list";
-import itemsData from "./items.json"; // Assuming this import is accurate
+import itemsData from "./items.json";
 
 const Page = () => {
     const [items, setItems] = useState(itemsData);
