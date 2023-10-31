@@ -12,7 +12,6 @@ function NewItem({ onAddItem }) {
         const item = { name, quantity, category };
         console.log(item);
 
-        
         onAddItem(item);
 
         setName("");
@@ -24,39 +23,37 @@ function NewItem({ onAddItem }) {
         <div className="bg-white p-6 rounded-lg shadow-lg max-w-md text-black">
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="name">Item Name:</label>
                     <input
                         type="text"
                         id="name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        placeholder="Enter item name"
+                        placeholder="Item name"
                         required
                     />
                 </div>
                 <div>
-                    <label htmlFor="quantity">Quantity:</label>
                     <input
                         type="number"
                         id="quantity"
                         value={quantity}
                         onChange={(e) => setQuantity(e.target.value)}
+                        placeholder="1"
                         required
                     />
                 </div>
                 <div>
-                    <label htmlFor="category">Category:</label>
                     <select
                         id="category"
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
+                        placeholder="Produce"
                     >
                         <option value="produce">Produce</option>
-
                     </select>
                 </div>
                 <div>
-                    <button type="submit">Add New Item</button>
+                    <button type="submit">+</button>
                 </div>
             </form>
             <Link href="/">
