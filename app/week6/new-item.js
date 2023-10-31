@@ -19,50 +19,82 @@ function NewItem({ onAddItem }) {
         setCategory("produce");
     };
 
-    return (
-        <div className="bg-white p-6 rounded-lg shadow-lg max-w-md text-black">
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <input
-                        type="text"
-                        id="name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        placeholder="Item name"
-                        required
-                    />
-                </div>
-                <div>
-                    <input
-                        type="number"
-                        id="quantity"
-                        value={quantity}
-                        onChange={(e) => setQuantity(e.target.value)}
-                        placeholder="1"
-                        required
-                    />
-                </div>
-                <div>
-                    <select
-                        id="category"
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                        placeholder="Produce"
-                    >
-                        <option value="produce">Produce</option>
-                    </select>
-                </div>
-                <div>
-                    <button type="submit">+</button>
-                </div>
-            </form>
-            <Link href="/">
-                <a className="text-gray-300 hover:text-orange-500 transition-transform duration-300 transform hover:scale-104 hover:translate-x-0.5 inline-block py-1 px-2 mt-2 mb-6">
-                    Back To Home
-                </a>
-            </Link>
-        </div>
-    );
-}
+ return (
+     <div className="form-container">
+         <form onSubmit={handleSubmit}>
+             <div className="input-group">
+                 <label htmlFor="name">Item Name:</label>
+                 <input
+                     type="text"
+                     id="name"
+                     value={name}
+                     onChange={(e) => setName(e.target.value)}
+                     placeholder="Enter item name"
+                     required
+                 />
+             </div>
+
+             <div className="input-group">
+                 <div className="half">
+                     <label htmlFor="quantity">Quantity:</label>
+                     <input
+                         type="number"
+                         id="quantity"
+                         value={quantity}
+                         onChange={(e) => setQuantity(e.target.value)}
+                         required
+                     />
+                 </div>
+
+                 <div className="half">
+                     <label htmlFor="category">Category:</label>
+                     <select
+                         id="category"
+                         value={category}
+                         onChange={(e) => setCategory(e.target.value)}
+                     >
+                         <option value="produce">Produce</option>
+                         <option value="dairy">Dairy</option>
+                         <option value="meat">Meat</option>
+                         {/* Add other categories as needed */}
+                     </select>
+                 </div>
+             </div>
+
+             <div className="input-group">
+                 <button type="submit">Add New Item</button>
+             </div>
+         </form>
+         <Link href="/">
+             <a className="back-link">Back To Home</a>
+         </Link>
+
+         <style jsx>{`
+             .form-container {
+                 background-color: rgba(255, 255, 255, 0.9);
+                 padding: 2rem;
+                 border-radius: 8px;
+                 width: 300px;
+                 margin: 0 auto;
+             }
+
+             .input-group {
+                 margin-bottom: 1.5rem;
+             }
+
+             .half {
+                 float: left;
+                 width: 50%;
+                 padding: 0 0.5rem;
+             }
+
+             .back-link {
+                 display: block;
+                 text-align: center;
+                 margin-top: 1rem;
+             }
+         `}</style>
+     </div>
+ );
 
 export default NewItem;
