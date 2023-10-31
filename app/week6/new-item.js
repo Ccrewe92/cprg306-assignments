@@ -74,7 +74,7 @@ function NewItem({ onAddItem }) {
                     color: #ffffff;
                     padding: 2rem;
                     border-radius: 8px;
-                    width: 400px;
+                    width: 450px;
                     margin: 0 auto;
                     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
                 }
