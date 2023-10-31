@@ -56,7 +56,6 @@ function NewItem({ onAddItem }) {
                             <option value="meat">Meat</option>
                             <option value="bakery">Bakery</option>
                             <option value="household">Household</option>
-                            {/* Add other categories as needed */}
                         </select>
                     </div>
                 </div>
@@ -75,7 +74,7 @@ function NewItem({ onAddItem }) {
                     color: #ffffff;
                     padding: 2rem;
                     border-radius: 8px;
-                    width: 300px;
+                    width: 400px;
                     margin: 0 auto;
                     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
                 }
@@ -110,6 +109,14 @@ function NewItem({ onAddItem }) {
 
                 button:hover {
                     background-color: #E94E1B;
+                }
+
+                input, select {
+                    color: #000;
+                    background-color: #FFF;
+                    border: 1px solid #CCC;
+                    border-radius: 4px;
+                    padding: 4px 8px;
                 }
             `}</style>
         </div>
