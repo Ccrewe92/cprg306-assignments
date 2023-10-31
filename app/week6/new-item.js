@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from 'react';
 import Link from 'next/link';
 
@@ -14,7 +12,7 @@ function NewItem({ onAddItem }) {
         const item = { name, quantity, category };
         console.log(item);
 
-        // Call the onAddItem prop with the item details
+        
         onAddItem(item);
 
         setName("");
@@ -25,7 +23,41 @@ function NewItem({ onAddItem }) {
     return (
         <div className="bg-white p-6 rounded-lg shadow-lg max-w-md text-black">
             <form onSubmit={handleSubmit}>
-                {/* ... rest of your form code remains unchanged ... */}
+                <div>
+                    <label htmlFor="name">Item Name:</label>
+                    <input
+                        type="text"
+                        id="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="Enter item name"
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor="quantity">Quantity:</label>
+                    <input
+                        type="number"
+                        id="quantity"
+                        value={quantity}
+                        onChange={(e) => setQuantity(e.target.value)}
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor="category">Category:</label>
+                    <select
+                        id="category"
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                    >
+                        <option value="produce">Produce</option>
+
+                    </select>
+                </div>
+                <div>
+                    <button type="submit">Add New Item</button>
+                </div>
             </form>
             <Link href="/">
                 <a className="text-gray-300 hover:text-orange-500 transition-transform duration-300 transform hover:scale-104 hover:translate-x-0.5 inline-block py-1 px-2 mt-2 mb-6">
