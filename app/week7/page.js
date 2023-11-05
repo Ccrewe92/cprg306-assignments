@@ -13,16 +13,11 @@ const Page = () => {
         setItems(prevItems => [...prevItems, newItem]);
     };
 
- const handleItemSelect = (item) => {
-   // Clean up the item name by removing size and emoji, then URL encode it
-   const cleanedName = item.name
-     .split(',')[0]
-     .trim()
-     .replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|�[�-�]|�[�-�]|[\u2011-\u26FF]|�[�-�])/g, '');
-
-   const encodedName = encodeURIComponent(cleanedName);
-   setSelectedItemName(encodedName);
- };
+    const handleItemSelect = (item) => {
+        // Clean up the item name by removing size and emoji
+        const cleanedName = item.name.split(',')[0].trim().replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|�[�-�]|�[�-�]|[\u2011-\u26FF]|�[�-�])/g, '');
+        setSelectedItemName(cleanedName);
+    };
 
     return (
         <main className="min-h-screen bg-gray-900 p-8">
