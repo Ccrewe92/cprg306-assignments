@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Item from './Item'; // Make sure the file name's case is correct
+import Item from './item';
 import Link from 'next/link';
 
 const ItemList = ({ items, onItemSelect }) => {
