@@ -36,7 +36,6 @@ const MealIdeas = ({ ingredient }) => {
   // Render the component
   return (
     <div>
-      {/* Use HTML entity for double quotes to avoid unescaped entities error */}
       <h2>Meal Ideas for &quot;{ingredient}&quot;</h2>
       <ul>
         {meals.length === 0 && <li>No meals found for &quot;{ingredient}&quot;</li>}
