@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Item from './Item';
+import Item from './item';
 import MealIdeas from './MealIdeas';
 
 const ItemList = ({ items }) => {
