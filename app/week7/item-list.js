@@ -6,6 +6,7 @@ const ItemList = ({ items }) => {
     const [sortBy, setSortBy] = useState('name');
     const [selectedIngredient, setSelectedIngredient] = useState(null);
 
+    // Sorting logic
     let sortedItems = [...items];
     if (sortBy === 'name') {
         sortedItems.sort((a, b) => a.name.localeCompare(b.name));
@@ -13,6 +14,7 @@ const ItemList = ({ items }) => {
         sortedItems.sort((a, b) => a.category.localeCompare(b.category));
     }
 
+    // Event handlers
     const handleSortByName = () => {
         setSortBy('name');
     };
@@ -25,10 +27,11 @@ const ItemList = ({ items }) => {
         setSortBy('groupedCategory');
     };
 
-    const handleItemSelect = (item) => {
-        setSelectedIngredient(item.name); // Set the selected ingredient for meal ideas
+    const handleItemSelect = (name) => {
+        setSelectedIngredient(name);
     };
 
+    // Group by category if needed
     const groupedItems = sortBy === 'groupedCategory' ? sortedItems.reduce((acc, item) => {
         if (!acc[item.category]) {
             acc[item.category] = [];
@@ -37,8 +40,10 @@ const ItemList = ({ items }) => {
         return acc;
     }, {}) : {};
 
+    // Sort categories for grouped view
     const sortedCategories = Object.keys(groupedItems).sort();
 
+    // Styling for buttons
     const buttonStyles = `
         .btn {
             padding: 8px 16px;
@@ -97,7 +102,7 @@ const ItemList = ({ items }) => {
                                         name={item.name}
                                         quantity={item.quantity}
                                         category={item.category}
-                                        onSelect={() => handleItemSelect(item)}
+                                        onSelect={() => handleItemSelect(item.name)}
                                     />
                                 ))}
                             </ul>
@@ -112,12 +117,12 @@ const ItemList = ({ items }) => {
                             name={item.name}
                             quantity={item.quantity}
                             category={item.category}
-                            onSelect={() => handleItemSelect(item)}
+                            onSelect={() => handleItemSelect(item.name)}
                         />
                     ))}
                 </ul>
             )}
-            {/* Add the MealIdeas component below your items list */}
+            {/* Pass the selectedIngredient to the MealIdeas component */}
             {selectedIngredient && <MealIdeas ingredient={selectedIngredient} />}
         </div>
     );
