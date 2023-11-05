@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 
-
 // Define the fetchMealIdeas function outside of the component
 const fetchMealIdeas = async (ingredient) => {
   try {
@@ -21,8 +20,12 @@ const MealIdeas = ({ ingredient }) => {
 
   // Define loadMealIdeas function inside the component
   const loadMealIdeas = async () => {
-    const mealIdeas = await fetchMealIdeas(ingredient);
-    setMeals(mealIdeas);
+    if (ingredient) { // Ensure ingredient is not null or undefined
+      const mealIdeas = await fetchMealIdeas(ingredient);
+      setMeals(mealIdeas);
+    } else {
+      setMeals([]); // Reset the meals if no ingredient is selected
+    }
   };
 
   // Use useEffect hook to call loadMealIdeas whenever the ingredient prop changes
@@ -33,15 +36,20 @@ const MealIdeas = ({ ingredient }) => {
   // Component's render method
   return (
     <div>
-      <h2>Meal Ideas</h2>
-      <ul>
-        {/* Render a list of meals */}
-        {meals && meals.map(meal => (
-          <li key={meal.idMeal}>
-            {meal.strMeal}
-          </li>
-        ))}
-      </ul>
+      {/* Conditionally render this section only if there are meals to show */}
+      {ingredient && meals.length > 0 && (
+        <>
+          <h2>Meal Ideas for {ingredient}</h2>
+          <ul>
+            {/* Render a list of meals */}
+            {meals.map(meal => (
+              <li key={meal.idMeal}>
+                {meal.strMeal}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
     </div>
   );
 };
