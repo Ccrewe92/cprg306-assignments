@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 // Define the API fetching function outside the component
 const fetchMealIdeas = async (ingredient) => {
@@ -20,25 +20,26 @@ const MealIdeas = ({ ingredient }) => {
   // Define state variable 'meals'
   const [meals, setMeals] = useState([]);
 
-  // Define the loadMealIdeas function inside the component
-  const loadMealIdeas = async () => {
+  // Define the loadMealIdeas function inside the component and memoize it with useCallback
+  const loadMealIdeas = useCallback(async () => {
     const fetchedMeals = await fetchMealIdeas(ingredient);
     setMeals(fetchedMeals);
-  };
+  }, [ingredient]);
 
   // Use useEffect to call loadMealIdeas whenever the ingredient prop changes
   useEffect(() => {
     if (ingredient) {
       loadMealIdeas();
     }
-  }, [ingredient]); // Correct dependency array
+  }, [ingredient, loadMealIdeas]);
 
   // Render the component
   return (
     <div>
-      <h2>Meal Ideas for `{`"${ingredient}"`}</h2>
+      {/* Use HTML entity for double quotes to avoid unescaped entities error */}
+      <h2>Meal Ideas for &quot;{ingredient}&quot;</h2>
       <ul>
-        {meals.length === 0 && <li>No meals found for "{ingredient}"</li>}
+        {meals.length === 0 && <li>No meals found for &quot;{ingredient}&quot;</li>}
         {meals.map((meal) => (
           <li key={meal.idMeal}>
             {meal.strMeal}
