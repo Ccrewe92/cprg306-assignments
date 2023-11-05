@@ -1,51 +1,36 @@
 "use client";
+import React, { useState } from 'react';
+import NewItem from './new-item';
+import ItemList from './item-list';
+import MealIdeas from './meal-ideas'; // Assuming this component exists
+import itemsData from './items.json';
 
-import React from 'react';
-import Link from 'next/link';
+const Page = () => {
+    const [items, setItems] = useState(itemsData);
+    const [selectedItemName, setSelectedItemName] = useState('');
 
-function BlankPage() {
+    const handleAddItem = (newItem) => {
+        setItems(prevItems => [...prevItems, newItem]);
+    };
+
+    const handleItemSelect = (itemName) => {
+        // Cleanup item name by removing sizes and emojis
+        const cleanedName = itemName.split(',')[0].trim().replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|[\u2600-\u26FF])/g, '');
+        setSelectedItemName(cleanedName);
+    };
+
     return (
-        <div className="container">
-            <h1>Blank Page Placeholder</h1>
-            <p>This is a placeholder for the blank page.</p>
-
-            <Link href="/">
-                <a>Go back to Home</a>
-            </Link>
-
-            <style jsx>{`
-                .container {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    height: 100vh;
-                    text-align: center;
-                }
-
-                h1 {
-                    font-size: 24px;
-                    margin-bottom: 16px;
-                }
-
-                p {
-                    font-size: 18px;
-                    margin-bottom: 24px;
-                }
-
-                a {
-                    color: blue;
-                    text-decoration: none;
-                    border-bottom: 1px dashed blue;
-                    padding-bottom: 2px;
-                }
-
-                a:hover {
-                    text-decoration: underline;
-                }
-            `}</style>
-        </div>
+        <main className="min-h-screen bg-gray-900 p-8 flex justify-between">
+            <div className="w-1/2 space-y-6">
+                <h1 className="text-2xl font-bold text-white mb-6">Shopping List</h1>
+                <NewItem onAddItem={handleAddItem} />
+                <ItemList items={items} onItemSelect={handleItemSelect} />
+            </div>
+            <div className="w-1/2">
+                <MealIdeas ingredient={selectedItemName} />
+            </div>
+        </main>
     );
 }
 
-export default BlankPage;
+export default Page;
