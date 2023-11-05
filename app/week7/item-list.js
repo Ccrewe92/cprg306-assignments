@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
-import Item from './item';
+import Item from './Item'; // Make sure the file name's case is correct
 import Link from 'next/link';
-
-// ItemList.js
-
-import React, { useState } from 'react';
-import Item from './Item'; // Assuming your Item component is in the same directory
 
 const ItemList = ({ items, onItemSelect }) => {
     const [sortBy, setSortBy] = useState('name');
