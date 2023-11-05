@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import Item from './item';
-import Link from 'next/link';
+import Item from './Item';
+import MealIdeas from './MealIdeas';
 
-const ItemList = ({ items, onItemSelect }) => {
+const ItemList = ({ items }) => {
     const [sortBy, setSortBy] = useState('name');
+    const [selectedIngredient, setSelectedIngredient] = useState(null);
 
     let sortedItems = [...items];
     if (sortBy === 'name') {
@@ -22,6 +23,10 @@ const ItemList = ({ items, onItemSelect }) => {
 
     const handleGroupByCategory = () => {
         setSortBy('groupedCategory');
+    };
+
+    const handleItemSelect = (item) => {
+        setSelectedIngredient(item.name); // Set the selected ingredient for meal ideas
     };
 
     const groupedItems = sortBy === 'groupedCategory' ? sortedItems.reduce((acc, item) => {
@@ -92,7 +97,7 @@ const ItemList = ({ items, onItemSelect }) => {
                                         name={item.name}
                                         quantity={item.quantity}
                                         category={item.category}
-                                        onSelect={() => onItemSelect(item)} // Added onSelect prop
+                                        onSelect={() => handleItemSelect(item)}
                                     />
                                 ))}
                             </ul>
@@ -107,11 +112,13 @@ const ItemList = ({ items, onItemSelect }) => {
                             name={item.name}
                             quantity={item.quantity}
                             category={item.category}
-                            onSelect={() => onItemSelect(item)} // Added onSelect prop
+                            onSelect={() => handleItemSelect(item)}
                         />
                     ))}
                 </ul>
             )}
+            {/* Add the MealIdeas component below your items list */}
+            {selectedIngredient && <MealIdeas ingredient={selectedIngredient} />}
         </div>
     );
 };
