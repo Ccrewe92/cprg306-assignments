@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Item from './item';
-import MealIdeas from './MealIdeas';
+import MealIdeas from './meal-ideas';
 
 const ItemList = ({ items }) => {
     const [sortBy, setSortBy] = useState('name');
