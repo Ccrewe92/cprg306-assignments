@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 
 // Define the fetchMealIdeas function outside of the component
 const fetchMealIdeas = async (ingredient) => {
