@@ -31,14 +31,14 @@ const MealIdeas = ({ ingredient }) => {
     if (ingredient) {
       loadMealIdeas();
     }
-  }, [ingredient]);
+  }, [ingredient]); // Correct dependency array
 
   // Render the component
   return (
     <div>
-      <h2>Meal Ideas for "{ingredient}"</h2>
+      <h2>Meal Ideas for `{`"${ingredient}"`}</h2>
       <ul>
-        {meals.length === 0 && <li>No meals found for {ingredient}</li>}
+        {meals.length === 0 && <li>No meals found for "{ingredient}"</li>}
         {meals.map((meal) => (
           <li key={meal.idMeal}>
             {meal.strMeal}
