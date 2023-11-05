@@ -1,58 +1,52 @@
-"use client";
 import React, { useState, useEffect } from 'react';
 
-// Define the fetchMealIdeas function outside of the component
+// Define the API fetching function outside the component
 const fetchMealIdeas = async (ingredient) => {
   try {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
     const data = await response.json();
-    return data.meals || []; // Return an empty array if data.meals is null
+    return data.meals || [];
   } catch (error) {
-    console.error("Error fetching meal ideas:", error);
-    return []; // Return an empty array in case of error
+    console.error("Could not fetch meals: ", error);
+    return [];
   }
 };
 
 // Define the MealIdeas component
 const MealIdeas = ({ ingredient }) => {
-  // Define the state variable 'meals' and initialize it to an empty array
+  // Define state variable 'meals'
   const [meals, setMeals] = useState([]);
 
-  // Define loadMealIdeas function inside the component
+  // Define the loadMealIdeas function inside the component
   const loadMealIdeas = async () => {
-    if (ingredient) { // Ensure ingredient is not null or undefined
-      const mealIdeas = await fetchMealIdeas(ingredient);
-      setMeals(mealIdeas);
-    } else {
-      setMeals([]); // Reset the meals if no ingredient is selected
-    }
+    const fetchedMeals = await fetchMealIdeas(ingredient);
+    setMeals(fetchedMeals);
   };
 
-  // Use useEffect hook to call loadMealIdeas whenever the ingredient prop changes
+  // Use useEffect to call loadMealIdeas whenever the ingredient prop changes
   useEffect(() => {
-    loadMealIdeas();
+    if (ingredient) {
+      loadMealIdeas();
+    }
   }, [ingredient]);
 
-  // Component's render method
+  // Render the component
   return (
     <div>
-      {/* Conditionally render this section only if there are meals to show */}
-      {ingredient && meals.length > 0 && (
-        <>
-          <h2>Meal Ideas for {ingredient}</h2>
-          <ul>
-            {/* Render a list of meals */}
-            {meals.map(meal => (
-              <li key={meal.idMeal}>
-                {meal.strMeal}
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
+      <h2>Meal Ideas for "{ingredient}"</h2>
+      <ul>
+        {meals.length === 0 && <li>No meals found for {ingredient}</li>}
+        {meals.map((meal) => (
+          <li key={meal.idMeal}>
+            {meal.strMeal}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
 
-// Export the MealIdeas component
 export default MealIdeas;

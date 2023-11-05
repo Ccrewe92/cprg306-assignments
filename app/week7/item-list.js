@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import Item from './item';
-import MealIdeas from './meal-ideas';
 
-const ItemList = ({ items }) => {
+const ItemList = ({ items, onItemSelect }) => {
     const [sortBy, setSortBy] = useState('name');
-    const [selectedIngredient, setSelectedIngredient] = useState(null);
 
-    // Sorting logic
     let sortedItems = [...items];
     if (sortBy === 'name') {
         sortedItems.sort((a, b) => a.name.localeCompare(b.name));
@@ -14,26 +11,28 @@ const ItemList = ({ items }) => {
         sortedItems.sort((a, b) => a.category.localeCompare(b.category));
     }
 
-    // Event handlers
-    const handleSortByName = () => setSortBy('name');
-    const handleSortByCategory = () => setSortBy('category');
-    const handleGroupByCategory = () => setSortBy('groupedCategory');
-    const handleItemSelect = (name) => setSelectedIngredient(name);
+    const groupedItems = sortedItems.reduce((acc, item) => {
+        if (!acc[item.category]) {
+            acc[item.category] = [];
+        }
+        acc[item.category].push(item);
+        return acc;
+    }, {});
 
-    // Group by category logic
-    let groupedItems = {};
-    if (sortBy === 'groupedCategory') {
-        groupedItems = sortedItems.reduce((acc, item) => {
-            if (!acc[item.category]) acc[item.category] = [];
-            acc[item.category].push(item);
-            return acc;
-        }, {});
-    }
-
-    // Sorted categories for grouped view
     const sortedCategories = Object.keys(groupedItems).sort();
 
-    // Styling for buttons
+    const handleSortByName = () => {
+        setSortBy('name');
+    };
+
+    const handleSortByCategory = () => {
+        setSortBy('category');
+    };
+
+    const handleGroupByCategory = () => {
+        setSortBy('groupedCategory');
+    };
+
     const buttonStyles = `
         .btn {
             padding: 8px 16px;
@@ -43,7 +42,7 @@ const ItemList = ({ items }) => {
             color: #333;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
-            margin-right: 10px; /* Adds spacing between buttons */
+            margin-right: 10px;
         }
 
         .btn:hover {
@@ -81,22 +80,24 @@ const ItemList = ({ items }) => {
                 </button>
             </div>
             {sortBy === 'groupedCategory' ? (
-                sortedCategories.map((category) => (
-                    <div key={category}>
-                        <h2>{category}</h2>
-                        <ul className="space-y-4">
-                            {groupedItems[category].map((item) => (
-                                <Item
-                                    key={item.id}
-                                    name={item.name}
-                                    quantity={item.quantity}
-                                    category={item.category}
-                                    onSelect={() => handleItemSelect(item.name)}
-                                />
-                            ))}
-                        </ul>
-                    </div>
-                ))
+                <div>
+                    {sortedCategories.map((category) => (
+                        <div key={category}>
+                            <h2>{category}</h2>
+                            <ul className="space-y-4">
+                                {groupedItems[category].map((item) => (
+                                    <Item
+                                        key={item.id}
+                                        name={item.name}
+                                        quantity={item.quantity}
+                                        category={item.category}
+                                        onSelect={() => onItemSelect(item)}
+                                    />
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
             ) : (
                 <ul className="space-y-4">
                     {sortedItems.map((item) => (
@@ -105,15 +106,13 @@ const ItemList = ({ items }) => {
                             name={item.name}
                             quantity={item.quantity}
                             category={item.category}
-                            onSelect={() => handleItemSelect(item.name)}
+                            onSelect={() => onItemSelect(item)}
                         />
                     ))}
                 </ul>
             )}
-            {/* Pass the selectedIngredient to the MealIdeas component */}
-            {selectedIngredient && <MealIdeas ingredient={selectedIngredient} />}
         </div>
     );
-};
+}
 
 export default ItemList;
