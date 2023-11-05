@@ -1,5 +1,5 @@
 import Link from "next/link";
-import StudentInfo from './StudentInfo'
+import StudentInfo from './StudentInfo';
 
 export default function Page() {
   return (
@@ -8,26 +8,38 @@ export default function Page() {
             CPRG 306: Web Development 2 - Assignments
         </h1>
         <StudentInfo />
-        
+
         <div className="mt-6 flex flex-col space-y-0.5">
-            <Link href="/week2" className="text-gray-300 hover:text-orange-500 transition-transform duration-300 transform hover:scale-104 hover:translate-x-0.5 inline-block py-1 px-2">
-                Week 2
+            <Link href="/week2">
+                <a className="text-gray-300 hover:text-orange-500 transition duration-300 ease-in-out transform hover:scale-105">
+                    Week 2
+                </a>
             </Link>
-            <Link href="/week3" className="text-gray-300 hover:text-orange-500 transition-transform duration-300 transform hover:scale-104 hover:translate-x-0.5 inline-block py-1 px-2">
-                Week 3
+            <Link href="/week3">
+                <a className="text-gray-300 hover:text-orange-500 transition duration-300 ease-in-out transform hover:scale-105">
+                    Week 3
+                </a>
             </Link>
-            <Link href="/week4" className="text-gray-300 hover:text-orange-500 transition-transform duration-300 transform hover:scale-104 hover:translate-x-0.5 inline-block py-1 px-2">
-                Week 4
+            <Link href="/week4">
+                <a className="text-gray-300 hover:text-orange-500 transition duration-300 ease-in-out transform hover:scale-105">
+                    Week 4
+                </a>
             </Link>
-            <Link href="/week5" className="text-gray-300 hover:text-orange-500 transition-transform duration-300 transform hover:scale-104 hover:translate-x-0.5 inline-block py-1 px-2">
-                Week 5
+            <Link href="/week5">
+                <a className="text-gray-300 hover:text-orange-500 transition duration-300 ease-in-out transform hover:scale-105">
+                    Week 5
+                </a>
             </Link>
-             <Link href="/week6" className="text-gray-300 hover:text-orange-500 transition-transform duration-300 transform hover:scale-104 hover:translate-x-0.5 inline-block py-1 px-2">
-                            Week 6
-                        </Link>
-              <Link href="/week7" className="text-gray-300 hover:text-orange-500 transition-transform duration-300 transform hover:scale-104 hover:translate-x-0.5 inline-block py-1 px-2">
-                             Week 7
-                         </Link>
+            <Link href="/week6">
+                <a className="text-gray-300 hover:text-orange-500 transition duration-300 ease-in-out transform hover:scale-105">
+                    Week 6
+                </a>
+            </Link>
+            <Link href="/week7">
+                <a className="text-gray-300 hover:text-orange-500 transition duration-300 ease-in-out transform hover:scale-105">
+                    Week 7
+                </a>
+            </Link>
         </div>
     </main>
   );
