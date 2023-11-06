@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+
+import React, { useState } from 'react';
 import { useUserAuth } from '../_utils/auth-context'; // Update the import path based on your project structure
 import NewItem from './new-item';
 import ItemList from './item-list';
@@ -10,20 +11,24 @@ const Page = () => {
     const [items, setItems] = useState(itemsData);
     const [selectedItemName, setSelectedItemName] = useState('');
     const { user } = useUserAuth(); // Using the custom hook to get the user
-   
-
-  
 
     const handleAddItem = (newItem) => {
         setItems((prevItems) => [...prevItems, newItem]);
     };
 
     const handleItemSelect = (item) => {
-        // Existing code for handleItemSelect
+        setSelectedItemName(item.name);
+        // ... any other logic for handleItemSelect
     };
 
-    // If the user is not logged in, return null or a loader
-    if (!user) return null;
+    // Display a message if the user is not logged in
+    if (!user) {
+        return (
+            <div className="min-h-screen flex items-center justify-center">
+                <p className="text-xl text-white">You must be logged in to view this page.</p>
+            </div>
+        );
+    }
 
     return (
         <main className="min-h-screen bg-gray-900 p-8">
