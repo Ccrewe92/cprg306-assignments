@@ -44,7 +44,9 @@ const LandingPage = () => {
                 >
                   Logout
                 </button>
-                {/* Add a link to the shopping list page here */}
+                {<Link href="app\week8\shopping-list\page.js" className="text-gray-300 hover:text-orange-500 transition duration-300 ease-in-out transform hover:scale-105">
+                Shopping List
+            </Link>}
               </>
             )}
           </div>
