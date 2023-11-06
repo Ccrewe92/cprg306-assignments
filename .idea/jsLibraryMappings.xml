@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <excludedPredefinedLibrary name="cprg306-assignments/CRPG306MyProject/node_modules" />
+    <excludedPredefinedLibrary name="cprg306-assignments/node_modules" />
+  </component>
+</project>
