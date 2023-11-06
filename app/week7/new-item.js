@@ -64,9 +64,9 @@ function NewItem({ onAddItem }) {
                     <button type="submit">Add New Item</button>
                 </div>
             </form>
-            <Link href="/">
-                <a className="back-link">Back To Home</a>
-            </Link>
+            <Link href="/" passHref>
+            <span className="back-link">Back To Home</span>
+        </Link>
 
             <style jsx>{`
                 .form-container {
