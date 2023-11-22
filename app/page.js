@@ -31,6 +31,9 @@ export default function Page() {
             <Link href="/week8" className="text-gray-300 hover:text-orange-500 transition duration-200 ease-in-out transform hover:scale-100">
                 Week 8
             </Link>
+            <Link href="/week10" className="text-gray-300 hover:text-orange-500 transition duration-200 ease-in-out transform hover:scale-100">
+                Week 10
+            </Link>
         </div>
     </main>
   );
